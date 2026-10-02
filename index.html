@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Favourite Human ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ivory: #faf6f0;
+      --rose: #b77b83;
+      --wine: #743e4c;
+      --cocoa: #49383a;
+      --muted: #947d7d;
+      --line: #e6d4d0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 15%, #f4e5e2 0, transparent 35%),
+        radial-gradient(circle at 85% 85%, #f1e4dc 0, transparent 35%),
+        var(--ivory);
+      color: var(--cocoa);
+      font-family: "DM Sans", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: min(100%, 760px);
+      text-align: center;
+      padding: 65px 24px;
+      animation: appear 1.2s ease both;
+    }
+
+    .eyebrow {
+      color: var(--rose);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 10px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 400;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 1;
+      color: var(--wine);
+    }
+
+    .script {
+      font-family: "Parisienne", cursive;
+      color: var(--rose);
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      margin-top: 10px;
+    }
+
+    .divider {
+      width: 70px;
+      height: 1px;
+      background: var(--line);
+      margin: 30px auto;
+    }
+
+    .intro {
+      max-width: 490px;
+      margin: 0 auto;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.2rem, 3vw, 1.55rem);
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .surprise {
+      margin-top: 34px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.45);
+      color: var(--wine);
+      padding: 13px 24px;
+      border-radius: 40px;
+      font-family: "DM Sans", sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .surprise:hover {
+      background: var(--wine);
+      color: white;
+      border-color: var(--wine);
+      transform: translateY(-2px);
+    }
+
+    .next-btn {
+      display: inline-block;
+      margin-top: 45px;
+      padding: 14px 34px;
+      border-radius: 40px;
+      background: var(--wine);
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      transition: 0.3s ease;
+    }
+
+    .next-btn:hover {
+      background: var(--rose);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(116, 62, 76, 0.12);
+    }
+
+    .footer {
+      margin-top: 55px;
+      color: #ad9996;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 17px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(73, 56, 58, 0.35);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 10;
+    }
+
+    .modal.show {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .letter {
+      background: var(--ivory);
+      border: 1px solid var(--line);
+      width: min(100%, 460px);
+      padding: 45px 30px;
+      border-radius: 5px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(73, 56, 58, 0.15);
+    }
+
+    .letter h2 {
+      font-family: "Parisienne", cursive;
+      font-size: 2.6rem;
+      font-weight: 400;
+      color: var(--wine);
+      margin-bottom: 18px;
+    }
+
+    .letter p {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.35rem;
+      line-height: 1.65;
+      color: var(--cocoa);
+    }
+
+    .close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -30px;
+      color: var(--rose);
+      opacity: 0.45;
+      pointer-events: none;
+      animation: floatUp linear forwards;
+      z-index: 0;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 45px 10px;
+      }
+
+      .eyebrow {
+        letter-spacing: 2.5px;
+      }
+
+      .letter {
+        padding: 42px 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <p class="eyebrow">A little corner of the universe</p>
+
+    <h1>To my favourite<br>human being</h1>
+    <p class="script">my Rofi ♡</p>
+
+    <div class="divider"></div>
+
+    <p class="intro">
+      Hey, Babe. I made this little place for you —
+      a collection of moments, feelings, and all the
+      little things that make my world feel like home.
+    </p>
+
+    <button class="surprise" id="surpriseBtn">
+      A tiny surprise for you ♡
+    </button>
+
+    <br>
+
+    <a href="memories.html" class="next-btn">
+      NEXT ♡
+    </a>
+
+    <p class="footer">Made with all my love, just for you.</p>
+  </main>
+
+  <div class="modal" id="surpriseModal" role="dialog"
+       aria-modal="true" aria-labelledby="letterTitle">
+    <div class="letter">
+      <button class="close" id="closeModal" aria-label="Close">&times;</button>
+      <h2 id="letterTitle">For you, Babe</h2>
+      <p>
+        I hope you know how proud I am of you.
+        You're a good son, a good boyfriend, and a
+        wonderful human being. I know you're working
+        hard for the life you dream of, and I believe
+        all that effort will be worth it.
+        <br><br>
+        Whatever happens, you don't have to face
+        everything alone. I'm right here, choosing
+        you, every single day. ♡
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("surpriseModal");
+    const surpriseBtn = document.getElementById("surpriseBtn");
+    const closeModal = document.getElementById("closeModal");
+
+    surpriseBtn.addEventListener("click", () => {
+      modal.classList.add("show");
+    });
+
+    closeModal.addEventListener("click", () => {
+      modal.classList.remove("show");
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.classList.remove("show");
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        modal.classList.remove("show");
+      }
+    });
+
+    function createHeart() {
+      const heart = document.createElement("span");
+      heart.className = "heart";
+      heart.textContent = Math.random() > 0.5 ? "♡" : "♥";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (12 + Math.random() * 18) + "px";
+      heart.style.animationDuration = (7 + Math.random() * 6) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 14000);
+    }
+
+    setInterval(createHeart, 1100);
+  </script>
+</body>
+</html>
+

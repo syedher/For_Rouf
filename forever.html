@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To My Favourite Human, Forever ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ivory: #faf6f0;
+      --rose: #b77b83;
+      --wine: #743e4c;
+      --cocoa: #49383a;
+      --muted: #947d7d;
+      --line: #e6d4d0;
+      --soft-rose: #f1e4e1;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--cocoa);
+      font-family: "DM Sans", sans-serif;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(183, 123, 131, 0.12), transparent 35%),
+        radial-gradient(ellipse at 80% 75%, rgba(116, 62, 76, 0.08), transparent 35%),
+        var(--ivory);
+    }
+
+    .page {
+      min-height: 100vh;
+      width: min(100%, 950px);
+      margin: auto;
+      padding: 48px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .eyebrow {
+      text-align: center;
+      color: var(--rose);
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      margin: 10px 0 20px;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3rem, 8vw, 5.8rem);
+      font-weight: 500;
+      line-height: 0.95;
+      text-align: center;
+      color: var(--wine);
+    }
+
+    .intro {
+      color: var(--muted);
+      max-width: 490px;
+      text-align: center;
+      line-height: 1.8;
+      font-size: 0.92rem;
+      margin: 22px auto 12px;
+    }
+
+    .script {
+      font-family: "Parisienne", cursive;
+      color: var(--rose);
+      font-size: 2rem;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    /* The envelope */
+
+    .envelope-area {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 15px 0 30px;
+    }
+
+    .envelope-button {
+      position: relative;
+      width: min(350px, 85vw);
+      height: 235px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      perspective: 1000px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .envelope {
+      position: absolute;
+      inset: 0;
+      background: #ead5d2;
+      border: 1px solid #d9bcb9;
+      border-radius: 4px;
+      box-shadow: 0 18px 35px rgba(73, 56, 58, 0.12);
+      overflow: hidden;
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, #f1dfdc, #e8ceca);
+      clip-path: polygon(0 0, 50% 55%, 100% 0);
+      z-index: 3;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .envelope-front {
+      position: absolute;
+      inset: 0;
+      background: #ead5d2;
+      clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+      z-index: 4;
+    }
+
+    .envelope-front::before,
+    .envelope-front::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+
+    .envelope-front::before {
+      left: 0;
+      border-width: 0 0 235px 175px;
+      border-color: transparent transparent #e5c9c6 transparent;
+    }
+
+    .envelope-front::after {
+      right: 0;
+      border-width: 235px 0 0 175px;
+      border-color: transparent transparent transparent #e2c5c2;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      z-index: 5;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      background: #f0ddda;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top;
+      transition: transform 0.85s ease, z-index 0.2s 0.35s;
+      filter: drop-shadow(0 2px 2px rgba(73, 56, 58, 0.06));
+    }
+
+    .seal {
+      position: absolute;
+      z-index: 6;
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 47px;
+      height: 47px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--wine);
+      color: #fff7f2;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.6rem;
+      box-shadow: 0 3px 8px rgba(73, 56, 58, 0.15);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .letter-peek {
+      position: absolute;
+      z-index: 2;
+      left: 8%;
+      bottom: 12px;
+      width: 84%;
+      height: 75%;
+      background: #fffdfb;
+      border: 1px solid var(--line);
+      box-shadow: 0 3px 10px rgba(73, 56, 58, 0.08);
+      transition: transform 1s ease;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 25px;
+      color: var(--rose);
+      font-family: "Parisienne", cursive;
+      font-size: 1.5rem;
+    }
+
+    .envelope-button.opened .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-button.opened .seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.4);
+    }
+
+    .envelope-button.opened .letter-peek {
+      transform: translateY(-100px);
+    }
+
+    .envelope-button:focus-visible {
+      outline: 2px solid var(--wine);
+      outline-offset: 8px;
+      border-radius: 4px;
+    }
+
+    .open-hint {
+      color: var(--muted);
+      font-size: 0.73rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    /* The final letter */
+
+    .letter-wrap {
+      width: min(650px, 100%);
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateY(25px);
+      transition:
+        max-height 1.5s ease,
+        opacity 0.9s ease,
+        transform 0.9s ease;
+    }
+
+    .letter-wrap.visible {
+      max-height: 1800px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .letter {
+      position: relative;
+      margin: 0 auto 30px;
+      padding: clamp(26px, 6vw, 55px);
+      background: rgba(255, 253, 251, 0.88);
+      border: 1px solid var(--line);
+      box-shadow: 0 15px 45px rgba(73, 56, 58, 0.07);
+      line-height: 1.95;
+    }
+
+    .letter::before {
+      content: "♡";
+      position: absolute;
+      top: 15px;
+      right: 22px;
+      color: rgba(183, 123, 131, 0.4);
+      font-size: 1.6rem;
+    }
+
+    .letter-date {
+      color: var(--rose);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    .letter h2 {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--wine);
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .letter p {
+      color: var(--cocoa);
+      font-size: 0.94rem;
+      margin-bottom: 18px;
+    }
+
+    .letter .signature {
+      font-family: "Parisienne", cursive;
+      color: var(--rose);
+      font-size: 2rem;
+      line-height: 1.3;
+      margin-top: 25px;
+      margin-bottom: 0;
+    }
+
+    /* Final message */
+
+    .finale {
+      text-align: center;
+      margin: 40px auto 55px;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .finale.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .finale .tiny {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 0.65rem;
+      margin-bottom: 18px;
+    }
+
+    .finale h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.2rem, 6vw, 3.7rem);
+      font-weight: 500;
+      color: var(--wine);
+      line-height: 1.15;
+    }
+
+    .finale .forever {
+      font-family: "Parisienne", cursive;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--rose);
+      margin-top: 14px;
+    }
+
+    .heart-button {
+      border: 1px solid var(--rose);
+      background: transparent;
+      color: var(--wine);
+      border-radius: 50px;
+      padding: 12px 22px;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      margin-top: 28px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .heart-button:hover {
+      background: var(--wine);
+      color: var(--ivory);
+      border-color: var(--wine);
+      transform: translateY(-2px);
+    }
+
+    .heart-button:focus-visible {
+      outline: 2px solid var(--wine);
+      outline-offset: 4px;
+    }
+
+    /* Floating hearts */
+
+    .floating-heart {
+      position: fixed;
+      bottom: -35px;
+      z-index: 0;
+      pointer-events: none;
+      color: rgba(183, 123, 131, 0.4);
+      animation: floatUp linear forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.8;
+      }
+      85% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-110vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Surprise heart burst */
+
+    .burst-heart {
+      position: fixed;
+      z-index: 10;
+      pointer-events: none;
+      color: var(--rose);
+      font-size: 20px;
+      animation: burst 1.8s ease-out forwards;
+    }
+
+    @keyframes burst {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.5);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(1.5) rotate(35deg);
+      }
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      margin-top: auto;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--wine);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--rose);
+    }
+
+    .nav-center {
+      color: var(--rose);
+      font-family: "Parisienne", cursive;
+      font-size: 1.35rem;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 35px 18px 24px;
+      }
+
+      .intro {
+        font-size: 0.86rem;
+      }
+
+      .script {
+        font-size: 1.7rem;
+      }
+
+      .envelope-button {
+        height: 210px;
+      }
+
+      .envelope-front::before {
+        border-width: 0 0 210px 42vw;
+      }
+
+      .envelope-front::after {
+        border-width: 210px 0 0 42vw;
+      }
+
+      .letter p {
+        font-size: 0.88rem;
+      }
+
+      .letter h2 {
+        font-size: 1.8rem;
+      }
+
+      .navigation {
+        gap: 8px;
+      }
+
+      .nav-link {
+        font-size: 0.63rem;
+      }
+
+      .nav-center {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <p class="eyebrow">For the one who has my heart</p>
+
+    <h1>One last thing,<br>my love.</h1>
+
+    <p class="intro">
+      We've reached the end of this little corner of the internet,
+      but there's something I still want you to read.
+    </p>
+
+    <p class="script">A letter I'll always mean ♡</p>
+
+    <div class="envelope-area">
+      <button
+        class="envelope-button"
+        id="envelopeButton"
+        type="button"
+        aria-label="Open your final letter"
+        aria-expanded="false"
+      >
+        <span class="envelope">
+          <span class="letter-peek">For my Rofi ♡</span>
+          <span class="envelope-front"></span>
+          <span class="envelope-flap"></span>
+          <span class="seal">♡</span>
+        </span>
+      </button>
+    </div>
+
+    <p class="open-hint" id="openHint">Click to open your letter</p>
+
+    <section class="letter-wrap" id="letterWrap" aria-hidden="true">
+      <article class="letter">
+        <p class="letter-date">A little piece of my heart</p>
+
+        <h2>My dearest Bacha,</h2>
+
+        <p>
+          If I could give you one thing in this entire world,
+          it would be the ability to see yourself through my eyes.
+          Maybe then you'd understand why I adore you so much.
+        </p>
+
+        <p>
+          I don't think love is always about grand gestures,
+          perfect days, or having everything figured out.
+          Sometimes, it's just finding someone whose presence
+          makes the world feel a little softer. Someone who
+          makes the simplest moments worth remembering.
+          For me, that's you.
+        </p>
+
+        <p>
+          I love the little things about you. The way you talk,
+          the way you laugh, the way you get excited about things,
+          and even the little habits that you probably don't
+          notice yourself. I love the person you are when
+          nobody is watching, too.
+        </p>
+
+        <p>
+          I know life won't always be easy. There will be days
+          when we're tired, when things don't go as planned,
+          and when we might not have all the right words.
+          But I hope we keep choosing to understand each other,
+          to listen, to grow, and to make room for each other's
+          dreams.
+        </p>
+
+        <p>
+          I want to celebrate every little victory of yours.
+          I want to be there when you achieve the things you've
+          worked so hard for. And when things get difficult,
+          I hope I can be a safe place for you to rest for a while.
+        </p>
+
+        <p>
+          Thank you for being part of my life, for giving me
+          memories I can revisit with a smile, and for making
+          my days feel a little more beautiful just by being in them.
+          I may not always express it perfectly, but I hope
+          you never question how much you mean to me.
+        </p>
+
+        <p>
+          And if we could go back to the beginning and do it
+          all over again, I'd still want to meet you.
+          I'd still want to know you, laugh with you,
+          make memories with you, and fall for you in all
+          the little ways that make our story ours.
+        </p>
+
+        <p>
+          So here's my little promise: I'll keep finding reasons
+          to love you, even in the ordinary days. I'll keep
+          cheering for you, reminding you of your worth,
+          and making memories with you wherever life takes us.
+        </p>
+
+        <p>
+          This website may have a last page, but my affection
+          for you doesn't end here. There are still so many
+          conversations to have, places to see, silly moments
+          to share, and beautiful memories waiting for us.
+        </p>
+
+        <p>
+          I love you, Rofi. More than this little page could
+          ever hold.
+        </p>
+
+        <p class="signature">
+          Always yours,<br>
+          Your girl ♡
+        </p>
+      </article>
+    </section>
+
+    <section class="finale" id="finale" aria-hidden="true">
+      <p class="tiny">And this is the part I want you to remember</p>
+
+      <h2>
+        In every version of my life,<br>
+        I'd still look for you.
+      </h2>
+
+      <p class="forever">You, me, and all our tomorrows ♡</p>
+
+      <button class="heart-button" id="heartButton" type="button">
+        One more little surprise ♡
+      </button>
+    </section>
+
+    <nav class="navigation" aria-label="Page navigation">
+      <a class="nav-link" href="you.html">← Previous</a>
+      <span class="nav-center">with all my love ♡</span>
+      <a class="nav-link" href="index.html">Start again ↻</a>
+    </nav>
+  </main>
+
+  <script>
+    const envelopeButton = document.getElementById("envelopeButton");
+    const letterWrap = document.getElementById("letterWrap");
+    const finale = document.getElementById("finale");
+    const openHint = document.getElementById("openHint");
+    const heartButton = document.getElementById("heartButton");
+
+    let isOpen = false;
+
+    envelopeButton.addEventListener("click", () => {
+      if (isOpen) return;
+
+      isOpen = true;
+
+      envelopeButton.classList.add("opened");
+      envelopeButton.setAttribute("aria-expanded", "true");
+      openHint.textContent = "A little something from my heart";
+
+      setTimeout(() => {
+        letterWrap.classList.add("visible");
+        letterWrap.setAttribute("aria-hidden", "false");
+      }, 500);
+
+      setTimeout(() => {
+        finale.classList.add("visible");
+        finale.setAttribute("aria-hidden", "false");
+      }, 1800);
+
+      setTimeout(() => {
+        letterWrap.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }, 800);
+    });
+
+    // Floating hearts
+    function createFloatingHeart() {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
+
+      const heart = document.createElement("span");
+      heart.className = "floating-heart";
+      heart.textContent = Math.random() > 0.5 ? "♡" : "♥";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (12 + Math.random() * 16) + "px";
+      heart.style.animationDuration = (8 + Math.random() * 6) + "s";
+
+      document.body.appendChild(heart);
+
+      heart.addEventListener("animationend", () => {
+        heart.remove();
+      });
+    }
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInterval(createFloatingHeart, 1300);
+    }
+
+    // The final surprise: a little burst of hearts
+    heartButton.addEventListener("click", () => {
+      const rect = heartButton.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      for (let i = 0; i < 32; i++) {
+        const heart = document.createElement("span");
+        heart.className = "burst-heart";
+        heart.textContent = Math.random() > 0.5 ? "♡" : "♥";
+
+        heart.style.left = centerX + "px";
+        heart.style.top = centerY + "px";
+        heart.style.setProperty("--x", (Math.random() - 0.5) * 380 + "px");
+        heart.style.setProperty("--y", (Math.random() - 0.5) * 330 + "px");
+        heart.style.animationDelay = Math.random() * 0.3 + "s";
+
+        document.body.appendChild(heart);
+
+        heart.addEventListener("animationend", () => {
+          heart.remove();
+        });
+      }
+
+      heartButton.textContent = "I love you, Rofi! ♡";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Letter to My Favourite Person ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ivory: #faf6f0;
+      --rose: #b77b83;
+      --wine: #743e4c;
+      --cocoa: #49383a;
+      --muted: #947d7d;
+      --line: #e6d4d0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 15%, #f4e5e2 0, transparent 35%),
+        radial-gradient(circle at 90% 90%, #f1e4dc 0, transparent 35%),
+        var(--ivory);
+      color: var(--cocoa);
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 65px 20px 45px;
+      text-align: center;
+      animation: fadeIn 1s ease both;
+    }
+
+    .eyebrow {
+      color: var(--rose);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 10px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: var(--wine);
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.7rem, 7vw, 4.8rem);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      font-family: "Parisienne", cursive;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      color: var(--rose);
+      margin-top: 8px;
+    }
+
+    .divider {
+      width: 65px;
+      height: 1px;
+      background: var(--line);
+      margin: 25px auto;
+    }
+
+    .intro {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* Envelope */
+
+    .letter-container {
+      max-width: 720px;
+      margin: 50px auto 0;
+    }
+
+    .envelope-area {
+      position: relative;
+      width: min(300px, 80vw);
+      height: 190px;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .envelope {
+      position: absolute;
+      inset: 0;
+      background: #ead8d2;
+      border: 1px solid #d9bdb7;
+      border-radius: 4px;
+      box-shadow: 0 15px 35px rgba(73, 56, 58, 0.12);
+      overflow: hidden;
+    }
+
+    .envelope::before,
+    .envelope::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      z-index: 2;
+    }
+
+    .envelope::before {
+      left: 0;
+      border-width: 0 0 190px 150px;
+      border-color: transparent transparent #e2c9c3 transparent;
+    }
+
+    .envelope::after {
+      right: 0;
+      border-width: 0 150px 190px 0;
+      border-color: transparent transparent #ecd9d3 transparent;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 150px solid transparent;
+      border-right: 150px solid transparent;
+      border-top: 110px solid #d5b4ae;
+      transform-origin: top;
+      transition: transform 0.7s ease;
+      z-index: 3;
+    }
+
+    .wax-seal {
+      position: absolute;
+      z-index: 4;
+      top: 75px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--wine);
+      color: #fff4ee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Parisienne", cursive;
+      font-size: 23px;
+      box-shadow: 0 3px 7px rgba(73, 56, 58, 0.15);
+      transition: opacity 0.3s ease;
+    }
+
+    .envelope-label {
+      position: absolute;
+      top: 135px;
+      left: 0;
+      right: 0;
+      z-index: 4;
+      color: var(--wine);
+      font-family: "Parisienne", cursive;
+      font-size: 1.45rem;
+    }
+
+    .open-hint {
+      margin-top: 25px;
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .open-button {
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 12px 25px;
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--wine);
+      font-family: "DM Sans", sans-serif;
+      font-size: 11px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .open-button:hover {
+      background: var(--wine);
+      color: white;
+      border-color: var(--wine);
+    }
+
+    /* Unfolding letter */
+
+    .letter-paper {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateY(20px);
+      transition:
+        max-height 1.5s ease,
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        padding 0.8s ease;
+      padding: 0 30px;
+      text-align: left;
+      background:
+        linear-gradient(rgba(255, 253, 249, 0.96), rgba(255, 253, 249, 0.96)),
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent 34px,
+          #eaded8 35px
+        );
+      border: 1px solid transparent;
+      box-shadow: 0 15px 40px rgba(73, 56, 58, 0.08);
+      border-radius: 3px;
+    }
+
+    .letter-container.open .envelope-area {
+      opacity: 0;
+      transform: translateY(-35px) scale(0.9);
+      pointer-events: none;
+      height: 0;
+      margin-bottom: 0;
+    }
+
+    .letter-container.open .open-hint,
+    .letter-container.open .open-button {
+      display: none;
+    }
+
+    .letter-container.open .letter-paper {
+      max-height: 4000px;
+      opacity: 1;
+      transform: translateY(0);
+      padding: 45px clamp(22px, 7vw, 65px);
+      border-color: var(--line);
+    }
+
+    .letter-date {
+      text-align: right;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    .letter-greeting {
+      font-family: "Parisienne", cursive;
+      color: var(--wine);
+      font-size: 2.3rem;
+      margin-bottom: 20px;
+    }
+
+    .letter-text {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.2rem, 3vw, 1.45rem);
+      line-height: 1.85;
+      color: var(--cocoa);
+    }
+
+    .letter-text p {
+      margin-bottom: 22px;
+    }
+
+    .letter-signoff {
+      margin-top: 35px;
+      font-family: "Parisienne", cursive;
+      font-size: 2rem;
+      color: var(--wine);
+      line-height: 1.5;
+    }
+
+    .letter-signoff span {
+      display: block;
+      font-size: 1.65rem;
+      color: var(--rose);
+    }
+
+    /* Navigation */
+
+    .page-navigation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      margin: 55px auto 0;
+    }
+
+    .nav-btn {
+      display: inline-block;
+      padding: 13px 28px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-family: "DM Sans", sans-serif;
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      transition: all 0.3s ease;
+    }
+
+    .previous {
+      border: 1px solid var(--line);
+      color: var(--wine);
+      background: transparent;
+    }
+
+    .next {
+      background: var(--wine);
+      color: white;
+      border: 1px solid var(--wine);
+    }
+
+    .previous:hover {
+      background: var(--wine);
+      color: white;
+    }
+
+    .next:hover {
+      background: var(--rose);
+      border-color: var(--rose);
+    }
+
+    .nav-heart {
+      color: var(--rose);
+      font-size: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 45px 16px 35px;
+      }
+
+      .eyebrow {
+        letter-spacing: 2.5px;
+      }
+
+      .letter-container {
+        margin-top: 40px;
+      }
+
+      .letter-container.open .letter-paper {
+        padding: 35px 22px;
+      }
+
+      .letter-text {
+        line-height: 1.75;
+      }
+
+      .page-navigation {
+        gap: 12px;
+      }
+
+      .nav-btn {
+        padding: 12px 20px;
+        font-size: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">Something from my heart</p>
+      <h1>A letter to my</h1>
+      <h2 class="subtitle">favourite person ♡</h2>
+      <div class="divider"></div>
+      <p class="intro">
+        There are things I feel every day that I don't
+        always know how to put into words.
+        So, today, I wrote them down for you.
+      </p>
+    </header>
+
+    <section class="letter-container" id="letterContainer">
+      <div class="envelope-area" id="envelopeArea">
+        <div class="envelope">
+          <div class="envelope-flap"></div>
+          <div class="wax-seal">♡</div>
+          <p class="envelope-label">To my Baby</p>
+        </div>
+      </div>
+
+      <p class="open-hint">A little letter, just for you</p>
+
+      <button class="open-button" id="openLetter">
+        OPEN MY LETTER ♡
+      </button>
+
+      <article class="letter-paper" id="letterPaper">
+        <p class="letter-date">To my favourite human,</p>
+
+        <h2 class="letter-greeting">Hey, jaanu...</h2>
+
+        <div class="letter-text">
+          <p>
+            I honestly don't know where to begin. There is so much
+            I want to tell you, so many little feelings I've been
+            carrying around, and somehow even a thousand words
+            don't feel enough when it comes to you.
+          </p>
+
+          <p>
+            First of all, I hope you know how much you mean to me.
+            Not just on special days, not just when everything is
+            going perfectly, but on the ordinary days too. On the
+            days when we're busy, when we're tired, when we don't
+            have anything extraordinary to talk about. When we are
+            fighting and just want to leave. When leaving feels
+            like the only option.Even then,
+            you're one of my favourite parts of being alive.
+          </p>
+
+          <p>
+            I wish you could see yourself through my eyes for just
+            a moment. Maybe then you'd understand why I'm so proud
+            of you. I see how hard you try. I see the effort you
+            put into your responsibilities, the dreams you carry,
+            and the pressure you place on yourself.
+            I know there are moments when things feel uncertain
+            and when the future seems like a lot to figure out.
+          </p>
+
+          <p>
+            And I know I may not always understand every struggle
+            you're going through. I might not have the perfect
+            words or know exactly how to make things better.
+            But I want you to know that I see you trying.
+            I notice the little things. I notice your strength,
+            even when you don't feel particularly strong.
+          </p>
+
+          <p>
+            You're a good son, Rofi. You're someone who cares,
+            someone who wants to build a good life, someone who
+            keeps going even when the road isn't as easy as
+            you'd hoped. I hope you give yourself credit for
+            that. You don't have to achieve everything at once
+            to be worthy of love, respect, or happiness.
+          </p>
+
+          <p>
+            I believe in your dreams. I believe in the person
+            you're becoming and in all the beautiful things
+            you're working towards. There will be difficult
+            days, disappointments, delays, and moments when
+            you question yourself. When those days come, I hope
+            you remember that one difficult chapter doesn't
+            define your entire story. And that I'll always stay with you.
+            That I'll choose you no matter what.
+          </p>
+
+          <p>
+            And when your hard work finally turns into the life
+            you've imagined, I hope you pause for a moment and
+            feel proud of the person who made it there.
+            I hope you remember all the days you kept going,
+            even when nobody could see how much effort it took.
+            I'll be cheering for you through every little
+            victory along the way.
+          </p>
+
+          <p>
+            I also want you to know that you don't always have
+            to be strong around me. You can have bad days.
+            You can feel lost, frustrated, quiet, or tired.
+            You don't need to pretend that everything is fine
+            just to make me happy. I want the real you, in all
+            your moods and moments. I want to be someone you
+            can come to, not another thing you have to be
+            perfect for. I'll not make you feel weak. I'll not think
+            you are weak just coz you cried infront of me. I'll never.
+          </p>
+
+          <p>
+            And about us... I hope we keep choosing each other
+            through all the versions of life waiting for us.
+            I hope we keep laughing at silly things, sharing
+            our little stories, making memories, learning
+            from our mistakes, and growing together.
+            I don't expect everything to be perfect.
+            I just want us to keep being honest, patient,
+            and kind to each other.
+          </p>
+
+          <p>
+            If there's one thing I want you to never doubt,
+            it's that my love isn't dependent on how successful
+            you are, how productive your day was, or how close
+            you are to achieving your goals. I love you for
+            being you. Your dreams matter to me, but so does
+            your peace. Your future matters to me, but so does
+            the person you are right now.
+          </p>
+
+          <p>
+            I can't promise that every day will be easy.
+            But I can promise that I want to keep showing up,
+            keep understanding you, keep making space for
+            your feelings, and keep reminding you of how
+            loved you are.
+          </p>
+
+          <p>
+            So, Baba, take your time. Chase your dreams.
+            Rest when you need to. Be proud of the little
+            progress. And whenever the world feels a little
+            too heavy, remember that you have someone who
+            believes in you with her whole heart.
+          </p>
+
+          <p>
+            I am so, so proud of you. Not only for what
+            you might become someday, but for who you are
+            today. And if I could choose all over again,
+            I'd still want to find my way to you.
+          </p>
+        </div>
+
+        <div class="letter-signoff">
+          With all my love,
+          <span>Your girl, always ♡</span>
+        </div>
+      </article>
+    </section>
+
+    <nav class="page-navigation" aria-label="Page navigation">
+      <a href="memories.html" class="nav-btn previous">
+        ← Previous
+      </a>
+
+      <span class="nav-heart">♡</span>
+
+      <a href="you.html" class="nav-btn next">
+        Next →
+      </a>
+    </nav>
+  </main>
+
+  <script>
+    const letterContainer = document.getElementById("letterContainer");
+    const openLetter = document.getElementById("openLetter");
+    const envelopeArea = document.getElementById("envelopeArea");
+    const letterPaper = document.getElementById("letterPaper");
+
+    function revealLetter() {
+      if (letterContainer.classList.contains("open")) return;
+
+      letterContainer.classList.add("open");
+      openLetter.setAttribute("aria-expanded", "true");
+
+      setTimeout(() => {
+        letterPaper.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }, 450);
+    }
+
+    openLetter.addEventListener("click", revealLetter);
+    envelopeArea.addEventListener("click", revealLetter);
+  </script>
+</body>
+</html>
+

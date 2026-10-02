@@ -1,0 +1,618 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Few Things to Remember ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ivory: #faf6f0;
+      --rose: #b77b83;
+      --wine: #743e4c;
+      --cocoa: #49383a;
+      --muted: #947d7d;
+      --line: #e6d4d0;
+      --soft-rose: #f1e4e1;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(183, 123, 131, 0.09), transparent 28%),
+        radial-gradient(circle at 90% 80%, rgba(116, 62, 76, 0.06), transparent 30%),
+        var(--ivory);
+      color: var(--cocoa);
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: min(1100px, 100%);
+      min-height: 100vh;
+      margin: auto;
+      padding: 50px 28px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--rose);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.8rem, 6vw, 4.7rem);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--wine);
+      text-align: center;
+    }
+
+    .subtitle {
+      max-width: 520px;
+      margin: 20px auto 12px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .script {
+      font-family: "Parisienne", cursive;
+      color: var(--rose);
+      font-size: 1.8rem;
+      text-align: center;
+      margin: 2px 0 36px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .cards {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+      perspective: 1200px;
+    }
+
+    .card {
+      width: 100%;
+      height: 340px;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      perspective: 1000px;
+      text-align: left;
+      color: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .card-inner {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.75s cubic-bezier(.2,.75,.25,1);
+    }
+
+    .card.is-flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fffdfb;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      box-shadow: 0 12px 30px rgba(73, 56, 58, 0.07);
+    }
+
+    .front {
+      padding: 13px 13px 18px;
+    }
+
+    .photo-frame {
+      width: 100%;
+      height: 245px;
+      padding: 7px;
+      background: #fff;
+      border: 1px solid #f0e7e3;
+      box-shadow: 0 3px 12px rgba(73, 56, 58, 0.08);
+    }
+
+    .photo-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      background: var(--soft-rose);
+    }
+
+    .photo-caption {
+      margin-top: 15px;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--wine);
+      font-size: 1.35rem;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .tap-label {
+      margin-top: 8px;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      padding: 28px;
+      text-align: center;
+      background:
+        linear-gradient(145deg, rgba(241, 228, 225, 0.65), transparent 65%),
+        #fffdfb;
+    }
+
+    .back::before,
+    .back::after {
+      content: "♡";
+      position: absolute;
+      color: rgba(183, 123, 131, 0.35);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+    }
+
+    .back::before {
+      top: 14px;
+      left: 18px;
+    }
+
+    .back::after {
+      bottom: 12px;
+      right: 18px;
+    }
+
+    .back-number {
+      color: var(--rose);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 16px;
+    }
+
+    .back h2 {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--wine);
+      font-size: 1.8rem;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .back p {
+      color: var(--cocoa);
+      font-size: 0.88rem;
+      line-height: 1.85;
+    }
+
+    .back .little-heart {
+      color: var(--rose);
+      font-size: 1.2rem;
+      margin-top: 20px;
+    }
+
+    .card:focus-visible {
+      outline: 2px solid var(--wine);
+      outline-offset: 5px;
+      border-radius: 5px;
+    }
+
+    .closing {
+      margin: 48px 0 40px;
+      text-align: center;
+    }
+
+    .closing p {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--wine);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.35;
+    }
+
+    .closing span {
+      display: block;
+      font-family: "Parisienne", cursive;
+      color: var(--rose);
+      font-size: 1.8rem;
+      margin-top: 8px;
+    }
+
+    .navigation {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      margin-top: auto;
+    }
+
+    .nav-link {
+      color: var(--wine);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--rose);
+    }
+
+    .nav-center {
+      font-family: "Parisienne", cursive;
+      color: var(--rose);
+      font-size: 1.35rem;
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -30px;
+      color: rgba(183, 123, 131, 0.35);
+      font-size: 18px;
+      pointer-events: none;
+      animation: floatUp 9s linear forwards;
+      z-index: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.8;
+      }
+      85% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-110vh) rotate(35deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 850px) {
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .card {
+        height: 330px;
+      }
+
+      .photo-frame {
+        height: 235px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .page {
+        padding: 38px 18px 24px;
+      }
+
+      .eyebrow {
+        font-size: 0.62rem;
+      }
+
+      .subtitle {
+        font-size: 0.86rem;
+        margin-top: 16px;
+      }
+
+      .script {
+        margin-bottom: 28px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+        max-width: 360px;
+        gap: 20px;
+      }
+
+      .card {
+        height: 370px;
+      }
+
+      .front {
+        padding: 14px 14px 20px;
+      }
+
+      .photo-frame {
+        height: 275px;
+      }
+
+      .photo-caption {
+        font-size: 1.45rem;
+      }
+
+      .back {
+        padding: 32px;
+      }
+
+      .back h2 {
+        font-size: 2rem;
+      }
+
+      .back p {
+        font-size: 0.92rem;
+      }
+
+      .navigation {
+        gap: 8px;
+      }
+
+      .nav-link {
+        font-size: 0.65rem;
+      }
+
+      .nav-center {
+        font-size: 1.15rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <p class="eyebrow">A little reminder for my favourite person</p>
+
+    <h1>Things I hope<br>you never forget</h1>
+
+    <p class="subtitle">
+      On days when life gets a little too loud, or when you forget
+      just how special you are, come back to these.
+    </p>
+
+    <p class="script">A few things from my heart to yours ♡</p>
+
+    <p class="hint">TAP EACH PHOTO TO TURN IT OVER</p>
+
+    <section class="cards" aria-label="Personal reminders">
+      <!-- Card 1 -->
+      <button class="card" type="button" aria-pressed="false" aria-label="You're a wonderful son. Tap to reveal the message.">
+        <span class="card-inner">
+          <span class="card-face front">
+            <span class="photo-frame">
+              <img src="images/rofi1.jpg" alt="Rouf with his family">
+            </span>
+            <span class="photo-caption">The wonderful son</span>
+            <span class="tap-label">A little reminder ♡</span>
+          </span>
+          <span class="card-face back">
+            <span class="back-number">01 / A REMINDER</span>
+            <h2>You're a wonderful son.</h2>
+            <p>
+              I hope you know how much love and goodness you carry
+              within you. The way you care, the way you try, and
+              the person you are make you so special. You are strong for going through all that alone.
+            </p>
+            <span class="little-heart">♡</span>
+          </span>
+        </span>
+      </button>
+
+      <!-- Card 2 -->
+      <button class="card" type="button" aria-pressed="false" aria-label="You're an amazing boyfriend. Tap to reveal the message.">
+        <span class="card-inner">
+          <span class="card-face front">
+            <span class="photo-frame">
+              <img src="images/rofi2.jpg" alt="A photo of us together">
+            </span>
+            <span class="photo-caption">My favourite person</span>
+            <span class="tap-label">A little reminder ♡</span>
+          </span>
+          <span class="card-face back">
+            <span class="back-number">02 / A REMINDER</span>
+            <h2>You're an amazing boyfriend.</h2>
+            <p>
+              Thank you for being you, for making me smile,
+              and for making ordinary moments feel beautiful.
+              I feel lucky that I get to love you.
+            </p>
+            <span class="little-heart">♡</span>
+          </span>
+        </span>
+      </button>
+
+      <!-- Card 3 -->
+      <button class="card" type="button" aria-pressed="false" aria-label="You're a good man. Tap to reveal the message.">
+        <span class="card-inner">
+          <span class="card-face front">
+            <span class="photo-frame">
+              <img src="images/rofi3.jpg" alt="A candid photo of Rouf">
+            </span>
+            <span class="photo-caption">The person you are</span>
+            <span class="tap-label">A little reminder ♡</span>
+          </span>
+          <span class="card-face back">
+            <span class="back-number">03 / A REMINDER</span>
+            <h2>You're a good man.</h2>
+            <p>
+              Never let the world make you doubt your kindness.
+              You don't have to be perfect to be a good person.
+              Just keep being the genuine, thoughtful you.
+            </p>
+            <span class="little-heart">♡</span>
+          </span>
+        </span>
+      </button>
+
+      <!-- Card 4 -->
+      <button class="card" type="button" aria-pressed="false" aria-label="Your hard work will be worth it. Tap to reveal the message.">
+        <span class="card-inner">
+          <span class="card-face front">
+            <span class="photo-frame">
+              <img src="images/rofi4.jpg" alt="Rouf studying or working">
+            </span>
+            <span class="photo-caption">The dreams you chase</span>
+            <span class="tap-label">A little reminder ♡</span>
+          </span>
+          <span class="card-face back">
+            <span class="back-number">04 / A REMINDER</span>
+            <h2>Your hard work will be worth it.</h2>
+            <p>
+              I see how hard you try, even when things get tiring.
+              Keep going at your own pace. Every little step
+              counts, and I'll always be cheering for you.
+            </p>
+            <span class="little-heart">♡</span>
+          </span>
+        </span>
+      </button>
+
+      <!-- Card 5 -->
+      <button class="card" type="button" aria-pressed="false" aria-label="You deserve beautiful things. Tap to reveal the message.">
+        <span class="card-inner">
+          <span class="card-face front">
+            <span class="photo-frame">
+              <img src="images/rofi5.jpg" alt="A happy photo of Rouf">
+            </span>
+            <span class="photo-caption">All the beautiful things</span>
+            <span class="tap-label">A little reminder ♡</span>
+          </span>
+          <span class="card-face back">
+            <span class="back-number">05 / A REMINDER</span>
+            <h2>You deserve beautiful things.</h2>
+            <p>
+              You deserve happiness that feels peaceful,
+              people who appreciate you, and days that make
+              you excited to wake up. I hope life gives you
+              so many reasons to smile. And I hope life gives you me. Hehe
+              
+            </p>
+            <span class="little-heart">♡</span>
+          </span>
+        </span>
+      </button>
+
+      <!-- Card 6 -->
+      <button class="card" type="button" aria-pressed="false" aria-label="I'm here. I'm not going anywhere. Tap to reveal the message.">
+        <span class="card-inner">
+          <span class="card-face front">
+            <span class="photo-frame">
+              <img src="images/rofi6.jpg" alt="One of our favourite photos together">
+            </span>
+            <span class="photo-caption">Us, always</span>
+            <span class="tap-label">A little reminder ♡</span>
+          </span>
+          <span class="card-face back">
+            <span class="back-number">06 / A REMINDER</span>
+            <h2>I'm here. I'm not going anywhere.</h2>
+            <p>
+              On your good days, your bad days, and all the
+              ordinary days in between, you have me.
+              You don't have to face everything alone.
+              I'm right here, loving you.
+            </p>
+            <span class="little-heart">♡</span>
+          </span>
+        </span>
+      </button>
+    </section>
+
+    <div class="closing">
+      <p>
+        And if you ever forget all of this,<br>
+        I'll remind you a thousand times.
+      </p>
+      <span>Because you mean that much to me ♡</span>
+    </div>
+
+    <nav class="navigation" aria-label="Page navigation">
+      <a class="nav-link" href="letter.html">← Previous</a>
+      <span class="nav-center">just us ♡</span>
+      <a class="nav-link" href="forever.html">Next →</a>
+    </nav>
+  </main>
+
+  <script>
+    // Flip cards when tapped or clicked.
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const flipped = card.classList.toggle("is-flipped");
+        card.setAttribute("aria-pressed", String(flipped));
+      });
+    });
+
+    // Soft floating hearts in the background.
+    function createHeart() {
+      const heart = document.createElement("span");
+      heart.className = "floating-heart";
+      heart.textContent = Math.random() > 0.5 ? "♡" : "♥";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (12 + Math.random() * 14) + "px";
+      heart.style.animationDuration = (7 + Math.random() * 5) + "s";
+
+      document.body.appendChild(heart);
+
+      heart.addEventListener("animationend", () => heart.remove());
+    }
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInterval(createHeart, 1400);
+    }
+  </script>
+</body>
+</html>
+
